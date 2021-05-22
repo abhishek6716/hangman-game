@@ -13,13 +13,20 @@ window.addEventListener('keypress', function (e) {
     guessesEl.textContent = g1.statusMessage
 })
 
-getPuzzle("1", (error, puzzle) => {
-    if(error){
-        console.log(`Error: ${error}`)
-    } else{
-        console.log(puzzle)
-    }
+
+getPuzzle('2').then((puzzle) => {
+    console.log(puzzle)
+}, (err) => {
+    console.log( `Error: ${err}`)
 })
+
+// getPuzzle("1", (error, puzzle) => {
+//     if(error){
+//         console.log(`Error: ${error}`)
+//     } else{
+//         console.log(puzzle)
+//     }
+// })
 
 // const request = new XMLHttpRequest()
 
