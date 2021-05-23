@@ -1,24 +1,44 @@
 const puzzleEl = document.querySelector('#puzzle')
 const guessesEl = document.querySelector('#guesses')
 
-const g1 = new Hangman('car parts', 2)
+let g1
 
-puzzleEl.textContent = g1.puzzle
-guessesEl.textContent = g1.statusMessage
 
 window.addEventListener('keypress', function (e) {
     const guess = String.fromCharCode(e.charCode)
     g1.makeGuess(guess)
+    render()
+})
+
+const render = () => {
     puzzleEl.textContent = g1.puzzle
     guessesEl.textContent = g1.statusMessage
-})
+}
+
+const startGame = async () => {
+    const puzzle = await getPuzzle('2')
+    g1 = new Hangman(puzzle, 5)
+    render()
+}
+
+document.querySelector('#reset').addEventListener('click', startGame)
+
+startGame()
 
 
-getPuzzle('2').then((puzzle) => {
-    console.log(puzzle)
-}, (err) => {
-    console.log( `Error: ${err}`)
-})
+// getPuzzle('2').then((puzzle) => {
+//     console.log(puzzle)
+// }).catch((error) => {
+//     console.log(`Error: ${error}`)
+// })
+
+
+// getPuzzle('2').then((puzzle) => {
+//     console.log(puzzle)
+// }, (err) => {
+//     console.log( `Error: ${err}`)
+// })
+
 
 // getPuzzle("1", (error, puzzle) => {
 //     if(error){
@@ -28,19 +48,7 @@ getPuzzle('2').then((puzzle) => {
 //     }
 // })
 
-// const request = new XMLHttpRequest()
 
-// request.addEventListener('readystatechange', (e) => {
-//     if(e.target.readyState === 4 && e.target.status === 200){
-//         const data = JSON.parse(e.target.responseText)
-//         console.log(data)
-//     } else if(e.target.readyState === 4){
-//         console.log('An error has taken place')
-//     }
-// })
-
-// request.open('GET', 'http://puzzle.mead.io/puzzle?wordCount=3')
-// request.send()
 
 
 
